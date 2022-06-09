@@ -1,0 +1,31 @@
+name: Parse Issue
+
+# on: [workflow_dispatch]
+
+on:
+  issues:
+    types: labeled
+
+jobs:
+   build:
+     name: Run Script
+     runs-on: ubuntu-latest
+     steps:
+       - name: Checkout
+         uses: actions/checkout@v2
+         
+       - name: Parse Issue Body
+         uses: peter-murray/issue-body-parser-action@v1
+         with:
+           github_token: ${{ secrets.GITHUB_TOKEN }}
+           # This is assuming that you are triggering off the issue, otherwise you will need to know the issue number
+           issue_id: ${{ github.event.issue.number }}
+           payload_marker: payload
+           
+       - name: Use Parsed Values
+         env:
+           DATA: ${{ steps.issue_body_parser.outputs.payload }}
+           CONTENT_ID_VALUE: ${{ fromJSON(steps.issue_body_parser.outputs.payload).id }}
+         run: >
+          echo "$DATA\n"
+          #echo "ID: $CONTENT_ID_VALUE\n"
