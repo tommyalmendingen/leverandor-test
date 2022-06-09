@@ -27,5 +27,5 @@ jobs:
            DATA: ${{ steps.issue_body_parser.outputs.payload }}
            CONTENT_ID_VALUE: ${{ fromJSON(steps.issue_body_parser.outputs.payload).id }}
          run: >
-          echo "$DATA\n"
+          # echo "$DATA\n"
           #echo "ID: $CONTENT_ID_VALUE\n"
