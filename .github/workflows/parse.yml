@@ -21,7 +21,6 @@ jobs:
            # This is assuming that you are triggering off the issue, otherwise you will need to know the issue number
            issue_id: ${{ github.event.issue.number }}
            payload_marker: payload
-         if: false
          
        - name: Use Parsed Values
          env:
@@ -30,4 +29,3 @@ jobs:
          run: >
           echo "$DATA\n"
           #echo "ID: $CONTENT_ID_VALUE\n"
-         if: false
